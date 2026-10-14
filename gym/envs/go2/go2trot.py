@@ -13,6 +13,10 @@ class Go2Trot(LeggedRobot):
     def _init_buffers(self):
         super()._init_buffers()
 
+        self.target_base_height = torch.full((self.num_envs, 1),
+            0.30,device=self.device
+        )
+
         self._actuated_dof_pos_limits = self.dof_pos_limits.index_select(
             0, self.actuated_dof_indices
         )
@@ -99,6 +103,8 @@ class Go2Trot(LeggedRobot):
 
     def _reset_system(self, reset_mask):
         super()._reset_system(reset_mask)
+        target_height = torch_rand_float(0.20,0.40,shape=self.target_base_height.shape,device=self.device,)
+        masked_update(self.target_base_height, target_height, reset_mask)
         phase = torch_rand_float(
             0,
             2 * torch.pi,
@@ -252,3 +258,7 @@ class Go2Trot(LeggedRobot):
             ),
             dim=1,
         )
+
+    def _reward_being_at_target_height(self):
+        error = self.base_height.flatten() - self.target_base_height.flatten()
+        return torch.exp(-torch.square(error / 0.1))

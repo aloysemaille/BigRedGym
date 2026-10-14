@@ -112,6 +112,7 @@ class Go2TrotRunnerCfg(Go2RunnerCfg):
             "base_ang_vel",
             "projected_gravity",
             "commands",
+            "target_base_height",
             "dof_pos_obs",
             "dof_vel",
             "dof_pos_target",
@@ -149,6 +150,7 @@ class Go2TrotRunnerCfg(Go2RunnerCfg):
             "dof_pos_target",
             "phase_obs",
             "phase_frequency",
+             "target_base_height",
         ]
         normalize_obs = False
 
@@ -165,7 +167,8 @@ class Go2TrotRunnerCfg(Go2RunnerCfg):
                 dof_pos_limits = 0.0
                 feet_contact_forces = 0.0
                 dof_near_home = 0.0
-                min_base_height = 0.5
+                min_base_height = 0.0
+                being_at_target_height = 1.0
                 action_rate = 0.25
                 action_rate2 = 0.025
                 trot_support = 0.625

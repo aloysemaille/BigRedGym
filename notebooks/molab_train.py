@@ -30,7 +30,7 @@ carry on. Nothing runs on its own, and nothing re-runs behind your back.
 
 import marimo
 
-__generated_with = "0.23.16"
+__generated_with = "0.25.1"
 app = marimo.App(width="medium")
 
 
@@ -104,7 +104,7 @@ def _(Path, os):
 def _(mo):
     mo.md("""
     ## 1 Setup
-    
+
     Here we clone the repository from [GitHub](https://github.com/LampLighterLab/BigRedGym). Notice that we
     must specify the branch as `main`, along with the repository itself, so we can clone the right one. In the future,
     you should substitute the URL for your fork and whatever branch you are developing policies on.
@@ -115,8 +115,8 @@ def _(mo):
 @app.cell
 def _():
     # --- edit, run this cell, then run the next one --------------------------
-    BRANCH = "main"
-    REPO_URL = "https://github.com/LampLighterLab/BigRedGym.git"
+    BRANCH = "assignment_4"
+    REPO_URL = "https://github.com/aloysemaille/BigRedGym.git"
     return BRANCH, REPO_URL
 
 
