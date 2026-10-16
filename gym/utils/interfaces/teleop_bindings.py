@@ -81,6 +81,7 @@ class TeleopCommands:
 
         env.commands[:] = 0.0
         env.commands[:, 0] = 1.0  # seed forward velocity so motion is visible
+        #env.commands[:, 0] = 0.0  # keep the robot static
         if hasattr(env.cfg, "commands"):
             env.cfg.commands.resampling_time = env.max_episode_length_s + 1
 
@@ -101,6 +102,12 @@ class TeleopCommands:
             c[:, 2] = torch.clamp(c[:, 2] + self.increment_yaw, max=self.max_vel_yaw)
         elif action == "yaw_right":
             c[:, 2] = torch.clamp(c[:, 2] - self.increment_yaw, min=-self.max_vel_yaw)
+        elif action == "up":
+            self.env.target_base_height.add_(0.02).clamp_(0.10, 0.60)
+            print(f"Target: {self.env.target_base_height[0, 0].item():.3f} m | Actual: {self.env.base_height.flatten()[0].item():.3f} m")
+        elif action == "down":
+            self.env.target_base_height.sub_(0.02).clamp_(0.10, 0.60)
+            print(f"Target: {self.env.target_base_height[0, 0].item():.3f} m | Actual: {self.env.base_height.flatten()[0].item():.3f} m")
         elif action == "reset":
             self.env.timed_out[:] = True
             self.env.reset()
