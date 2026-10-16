@@ -80,8 +80,8 @@ class TeleopCommands:
         self.increment_yaw = self.max_vel_yaw * 0.2
 
         env.commands[:] = 0.0
-        #env.commands[:, 0] = 1.0  # seed forward velocity so motion is visible
-        env.commands[:, 0] = 0.0  # keep the robot static
+        env.commands[:, 0] = 1.0  # seed forward velocity so motion is visible
+        #env.commands[:, 0] = 0.0  # keep the robot static
         if hasattr(env.cfg, "commands"):
             env.cfg.commands.resampling_time = env.max_episode_length_s + 1
 
