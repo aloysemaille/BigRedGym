@@ -103,10 +103,10 @@ class TeleopCommands:
         elif action == "yaw_right":
             c[:, 2] = torch.clamp(c[:, 2] - self.increment_yaw, min=-self.max_vel_yaw)
         elif action == "up":
-            self.env.target_base_height.add_(0.02).clamp_(0.10, 0.60)
+            self.env.target_base_height.add_(0.02).clamp_(0.20, 0.38)
             print(f"Target: {self.env.target_base_height[0, 0].item():.3f} m | Actual: {self.env.base_height.flatten()[0].item():.3f} m")
         elif action == "down":
-            self.env.target_base_height.sub_(0.02).clamp_(0.10, 0.60)
+            self.env.target_base_height.sub_(0.02).clamp_(0.20, 0.38)
             print(f"Target: {self.env.target_base_height[0, 0].item():.3f} m | Actual: {self.env.base_height.flatten()[0].item():.3f} m")
         elif action == "reset":
             self.env.timed_out[:] = True
