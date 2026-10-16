@@ -76,7 +76,7 @@ class Go2Trot(LeggedRobot):
 
     def _reset_system(self, reset_mask):
         super()._reset_system(reset_mask)
-        target_height = torch_rand_float(0.10,0.60,shape=self.target_base_height.shape,device=self.device,)
+        target_height = torch_rand_float(0.20,0.38,shape=self.target_base_height.shape,device=self.device,)
         masked_update(self.target_base_height, target_height, reset_mask)
         phase = torch_rand_float(
             0,
